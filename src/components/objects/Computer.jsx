@@ -38,7 +38,7 @@ const Computer = () => {
 
       {/* Create divs in 3D space */}
       <Html scale={100} position={[41, 1.7, -2]}>
-        <div className={showModal && styles.container}>
+        <div className={showModal ? styles.container : undefined}>
           {showModal ? (
             <Modal closeModal={() => setShowModal(false)} />
           ) : (
