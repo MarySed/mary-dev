@@ -1,0 +1,21 @@
+@keyframes circlePulse {
+  from {
+    transform: scale(0.2, 0.2);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(2, 2);
+    opacity: 0;
+  }
+}
+
+.content {
+  text-align: left;
+  background: transparent;
+  border-color: #fff;
+  border-width: 3px;
+  border-style: solid;
+  padding: 50px;
+  border-radius: 50%;
+  animation: circlePulse 3s infinite cubic-bezier(0.36, 0.11, 0.89, 0.32);
+}

@@ -1,0 +1,85 @@
+.day {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(0deg, #cc7b32 0%, #00bfff 100%);
+}
+
+.night {
+  background: #1c1b1f;
+}
+
+// Day night toggle
+.day-night {
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  color: #fff;
+  z-index: 999;
+  cursor: pointer;
+  transition: ease-out opacity 0.5s;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.move-forward {
+  position: absolute;
+  top: 50vh;
+  right: 5vw;
+  color: #fff;
+  z-index: 999;
+  cursor: default;
+}
+
+.move-backward {
+  position: absolute;
+  top: 50vh;
+  left: 5vw;
+  color: #fff;
+  z-index: 999;
+  cursor: default;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.35;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.indicator {
+  animation-name: blink;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  font-size: 30px;
+}
+
+@media screen and (max-width: 760px) {
+  .move-forward {
+    right: 0;
+  }
+
+  .move-backward {
+    left: 0;
+  }
+}
+
+// Gloomy color palette to maybe use
+
+// #617260 (teal green)
+// #63683e (mid green saturated)
+// #c2c3be (dark light gray)
+// #e4e3de (light gray)
+// #122b0d (dark green)
