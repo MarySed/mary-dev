@@ -1,12 +1,21 @@
 import React, { useRef, useState } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useFrame, useLoader } from "react-three-fiber";
-import { GROUND_HEIGHT } from "../../constants/constants";
+import { useTransition, a } from "react-spring";
+import { useLoader } from "react-three-fiber";
+import { GROUND_HEIGHT } from "constants/constants";
 import { Html } from "drei";
+import Modal from "components/Modal";
 import styles from "./Computer.module.scss";
 
 const Computer = () => {
+  const [showModal, setShowModal] = useState(false);
   const { nodes } = useLoader(GLTFLoader, "/models/computer-1.glb");
+
+  const transitions = useTransition(showModal, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
 
   const computerRef = useRef(null);
 
@@ -26,13 +35,19 @@ const Computer = () => {
           metalness={0.3}
         />
       </mesh>
-      {/* Overlay div on computer. Potentially this can be moved but for now I'll leave it here. */}
-      {/* TODO: Add interactivity */}
+
+      {/* Create divs in 3D space */}
       <Html scale={100} position={[41, 1.7, -2]}>
-        <div
-          className={styles.content}
-          onClick={() => console.log("this doesnt do anything yet")}
-        ></div>
+        <div className={showModal && styles.container}>
+          {showModal ? (
+            <Modal closeModal={() => setShowModal(false)} />
+          ) : (
+            <div
+              className={styles.content}
+              onClick={() => setShowModal(true)}
+            />
+          )}
+        </div>
       </Html>
     </group>
   );

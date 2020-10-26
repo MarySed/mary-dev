@@ -1,0 +1,5 @@
+{
+  "files.trimFinalNewlines": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.preferences.importModuleSpecifier": "non-relative"
+}
