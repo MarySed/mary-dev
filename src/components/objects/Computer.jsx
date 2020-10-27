@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useTransition, a } from "react-spring";
+import { useTransition } from "react-spring";
 import { useLoader } from "react-three-fiber";
 import { GROUND_HEIGHT } from "constants/constants";
 import { Html } from "drei";

@@ -10,7 +10,9 @@ const distance = (p1, p2) => {
   const b = p2.y - p1.y;
   const c = p2.z - p1.z;
 
-  return Math.sqrt(a * a + b * b + c * c);
+  const result = Math.sqrt(a * a + b * b + c * c);
+  console.log(result);
+  return result;
 };
 
 const Lasers = ({ lasers }) => {
@@ -54,7 +56,7 @@ const LaserController = ({ lasers, setLasers, userPosition }) => {
           ])
         }
       >
-        <planeBufferGeometry attach="geometry" args={[20, 10]} />
+        <planeBufferGeometry attach="geometry" args={[100, 10]} />
         <meshBasicMaterial
           attach="material"
           visible
@@ -68,13 +70,12 @@ const LaserController = ({ lasers, setLasers, userPosition }) => {
   );
 };
 
-const GameLogic = ({ userPosition }) => {
-  const [enemies, setEnemies] = useState([]); // refactor to take props...
+const GameLogic = ({ userPosition, enemiesPos, setEnemiesPos, position }) => {
   const [lasers, setLasers] = useState([]);
 
   useFrame(() => {
-    const hitEnemies = enemies
-      ? enemies.map((enemy) => {
+    const hitEnemies = enemiesPos
+      ? enemiesPos.map((enemy) => {
           return (
             lasers.filter(
               () =>
@@ -84,13 +85,13 @@ const GameLogic = ({ userPosition }) => {
         })
       : [];
 
-    if (hitEnemies.includes(true) && enemies.length > 0) {
-      console.log("enemy hit");
+    if (hitEnemies.includes(true) && enemiesPos.length > 0) {
+      console.log("hitEnemies", hitEnemies);
     }
 
-    setEnemies(
-      enemies
-        .map((enemy) => ({ x: enemy.x, y: enemy.y, z: enemy.z }))
+    setEnemiesPos(
+      enemiesPos
+        .map((enemy) => ({ x: enemy.x, y: enemy.y, z: enemy.z, key: enemy.id }))
         .filter((enemy, idx) => !hitEnemies[idx])
     );
 

@@ -1,7 +1,12 @@
 import React, { useRef, Suspense } from "react";
 import { useFrame, useThree } from "react-three-fiber";
 import { Html } from "drei";
-import { LEFT_LIMIT, RIGHT_LIMIT } from "../../constants/constants";
+import {
+  LEFT_LIMIT,
+  RIGHT_LIMIT,
+  LEVEL_START,
+  LEVEL_END,
+} from "../../constants/constants";
 import Stars from "./Stars";
 import Clouds from "./Clouds";
 import End from "../objects/End";
@@ -9,9 +14,17 @@ import Forest from "./Forest";
 import Text from "../objects/Text";
 import Computer from "../objects/Computer";
 import Ufo from "../objects/Ufo";
-import GameLogic from "components/LaserController";
+import Enemies from "components/objects/Enemies";
+import GameLogic from "components/GameLogic";
 
-const Terrain = ({ terrainPos, setTerrainPos, isDay }) => {
+const Terrain = ({
+  terrainPos,
+  setTerrainPos,
+  isDay,
+  enemiesPos,
+  setEnemiesPos,
+  userPosition,
+}) => {
   const terrainRef = useRef();
 
   const { size } = useThree();
@@ -94,6 +107,10 @@ const Terrain = ({ terrainPos, setTerrainPos, isDay }) => {
       <Suspense fallback={null}>
         <Computer />
       </Suspense>
+
+      {/* TODO: Miiiiiight want to move this inside of terrain.... */}
+
+      <Enemies enemiesPos={enemiesPos} />
 
       <End />
 

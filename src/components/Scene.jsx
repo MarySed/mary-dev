@@ -11,11 +11,11 @@ import {
 } from "../constants/constants";
 import Character from "./Character";
 import Loading from "./Loading";
-import CameraControls from "./CameraControls";
-import Terrain from "./environment/Terrain";
-import MoonIcon from "../assets/icons/MoonIcon";
-import SunIcon from "../assets/icons/SunIcon";
-import GameLogic from "components/LaserController";
+import CameraControls from "components/CameraControls";
+import Terrain from "components/environment/Terrain";
+import MoonIcon from "assets/icons/MoonIcon";
+import SunIcon from "assets/icons/SunIcon";
+import GameLogic from "components/GameLogic";
 import styles from "./Scene.module.scss";
 
 extend({ OrbitControls });
@@ -27,7 +27,11 @@ const Scene = () => {
     position: { x: 0, y: 0 },
     rotation: { z: 0, x: 0, y: 0 },
   });
-  const [enemies, setEnemies] = useState();
+  const [enemiesPos, setEnemiesPos] = useState([
+    { id: Math.random(), x: 0, y: 0, z: -1 },
+    { id: Math.random(), x: 4, y: -2, z: -1 },
+    { id: Math.random(), x: 0, y: 0, z: -3 },
+  ]);
 
   const fogColor = isDay ? "#b666d2" : "#85e21f";
 
@@ -54,14 +58,21 @@ const Scene = () => {
               setUserPosition={setUserPosition}
             />
           </Suspense>
+
           {-terrainPos.position.x > LEVEL_START &&
             -terrainPos.position.x < LEVEL_END && (
-              <GameLogic userPosition={userPosition} />
+              <GameLogic
+                userPosition={userPosition}
+                enemiesPos={enemiesPos}
+                setEnemiesPos={setEnemiesPos}
+              />
             )}
+
           <Terrain
             terrainPos={terrainPos}
             setTerrainPos={setTerrainPos}
             isDay={isDay}
+            enemiesPos={enemiesPos}
           />
         </Canvas>
       </Suspense>
