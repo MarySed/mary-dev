@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useTransition } from "react-spring";
 import { useLoader } from "react-three-fiber";
 import { GROUND_HEIGHT } from "constants/constants";
 import { Html } from "drei";
@@ -10,12 +9,6 @@ import styles from "./Computer.module.scss";
 const Computer = () => {
   const [showModal, setShowModal] = useState(false);
   const { nodes } = useLoader(GLTFLoader, "/models/computer-1.glb");
-
-  const transitions = useTransition(showModal, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
 
   const computerRef = useRef(null);
 

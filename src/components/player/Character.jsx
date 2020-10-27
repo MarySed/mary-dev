@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useLoader, useFrame } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -13,7 +13,7 @@ const Character = ({ userPosition, setUserPosition }) => {
     if (user !== undefined) {
       const flipPlane = () => {
         // Make plane face left
-        if (mouse.x < -0.9) {
+        if (mouse.x < -0.8) {
           return -Math.PI / 2;
         }
 

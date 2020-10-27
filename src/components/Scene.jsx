@@ -9,13 +9,13 @@ import {
   LEVEL_END,
   RIGHT_LIMIT,
 } from "../constants/constants";
-import Character from "./Character";
+import Character from "./player/Character";
 import Loading from "./Loading";
 import CameraControls from "components/CameraControls";
 import Terrain from "components/environment/Terrain";
 import MoonIcon from "assets/icons/MoonIcon";
 import SunIcon from "assets/icons/SunIcon";
-import GameLogic from "components/GameLogic";
+import GameLogic from "components/player/GameLogic";
 import styles from "./Scene.module.scss";
 
 extend({ OrbitControls });
@@ -28,9 +28,10 @@ const Scene = () => {
     rotation: { z: 0, x: 0, y: 0 },
   });
   const [enemiesPos, setEnemiesPos] = useState([
-    { id: Math.random(), x: 60, y: 3, z: 0 },
+    { id: Math.random(), x: 70, y: 2, z: 0 },
     { id: Math.random(), x: 70, y: -2, z: 0 },
     { id: Math.random(), x: 80, y: 0, z: 0 },
+    { id: Math.random(), x: 80, y: 1, z: 0 },
   ]);
 
   const fogColor = isDay ? "#b666d2" : "#85e21f";
