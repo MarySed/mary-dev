@@ -9,6 +9,7 @@ import Forest from "./Forest";
 import Text from "../objects/Text";
 import Computer from "../objects/Computer";
 import Ufo from "../objects/Ufo";
+import GameLogic from "components/LaserController";
 
 const Terrain = ({ terrainPos, setTerrainPos, isDay }) => {
   const terrainRef = useRef();
@@ -98,7 +99,7 @@ const Terrain = ({ terrainPos, setTerrainPos, isDay }) => {
 
       <Clouds />
 
-      {/* TODO: Add some html text toward the end of the terrain maybe */}
+      {/* TODO: Add some html text toward the end of the terrain as credits */}
 
       {/* Conditionally render stars if night */}
       {!isDay && <Stars position={[0, 0, -2]} />}

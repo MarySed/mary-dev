@@ -2,9 +2,7 @@ import React, { useRef, useState } from "react";
 import { useLoader, useFrame } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-const Character = () => {
-  const [userPosition, setUserPosition] = useState();
-
+const Character = ({ userPosition, setUserPosition }) => {
   // Place GLB models in public dir
   const { nodes } = useLoader(GLTFLoader, "/models/paper-plane.glb");
 
@@ -15,7 +13,7 @@ const Character = () => {
     if (user !== undefined) {
       const flipPlane = () => {
         // Make plane face left
-        if (mouse.x < -0.5) {
+        if (mouse.x < -0.9) {
           return -Math.PI / 2;
         }
 

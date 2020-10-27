@@ -3,13 +3,19 @@ import classNames from "classnames";
 import { Canvas, extend } from "react-three-fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { isDaytime } from "../utilities/utilities";
-import { LEFT_LIMIT, RIGHT_LIMIT } from "../constants/constants";
+import {
+  LEFT_LIMIT,
+  LEVEL_START,
+  LEVEL_END,
+  RIGHT_LIMIT,
+} from "../constants/constants";
 import Character from "./Character";
 import Loading from "./Loading";
 import CameraControls from "./CameraControls";
 import Terrain from "./environment/Terrain";
 import MoonIcon from "../assets/icons/MoonIcon";
 import SunIcon from "../assets/icons/SunIcon";
+import GameLogic from "components/LaserController";
 import styles from "./Scene.module.scss";
 
 extend({ OrbitControls });
@@ -17,6 +23,11 @@ extend({ OrbitControls });
 const Scene = () => {
   const [isDay, setIsDay] = useState(isDaytime);
   const [terrainPos, setTerrainPos] = useState({ position: { x: 0 } });
+  const [userPosition, setUserPosition] = useState({
+    position: { x: 0, y: 0 },
+    rotation: { z: 0, x: 0, y: 0 },
+  });
+  const [enemies, setEnemies] = useState();
 
   const fogColor = isDay ? "#b666d2" : "#85e21f";
 
@@ -38,8 +49,15 @@ const Scene = () => {
           <fog attach="fog" args={[fogColor, 1, 20]} />
 
           <Suspense fallback={<Loading />}>
-            <Character />
+            <Character
+              userPosition={userPosition}
+              setUserPosition={setUserPosition}
+            />
           </Suspense>
+          {-terrainPos.position.x > LEVEL_START &&
+            -terrainPos.position.x < LEVEL_END && (
+              <GameLogic userPosition={userPosition} />
+            )}
           <Terrain
             terrainPos={terrainPos}
             setTerrainPos={setTerrainPos}
