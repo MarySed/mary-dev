@@ -28,9 +28,9 @@ const Scene = () => {
     rotation: { z: 0, x: 0, y: 0 },
   });
   const [enemiesPos, setEnemiesPos] = useState([
-    { id: Math.random(), x: 0, y: 0, z: -1 },
-    { id: Math.random(), x: 4, y: -2, z: -1 },
-    { id: Math.random(), x: 0, y: 0, z: -3 },
+    { id: Math.random(), x: 60, y: 3, z: 0 },
+    { id: Math.random(), x: 70, y: -2, z: 0 },
+    { id: Math.random(), x: 80, y: 0, z: 0 },
   ]);
 
   const fogColor = isDay ? "#b666d2" : "#85e21f";
@@ -73,6 +73,8 @@ const Scene = () => {
             setTerrainPos={setTerrainPos}
             isDay={isDay}
             enemiesPos={enemiesPos}
+            setEnemiesPos={setEnemiesPos}
+            userPosition={userPosition}
           />
         </Canvas>
       </Suspense>

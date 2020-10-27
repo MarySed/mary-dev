@@ -5,13 +5,13 @@ import { useFrame } from "react-three-fiber";
 
 // Calculate the distance between two points in 3d space.
 // Used to detect lasers intersecting with enemies.
-const distance = (p1, p2) => {
-  const a = p2.x - p1.x;
-  const b = p2.y - p1.y;
-  const c = p2.z - p1.z;
+const distance = (laser, enemy) => {
+  const a = enemy.x / 10 - laser.x;
+  const b = enemy.y - laser.y;
+  const c = enemy.z - laser.z;
 
   const result = Math.sqrt(a * a + b * b + c * c);
-  console.log(result);
+
   return result;
 };
 
