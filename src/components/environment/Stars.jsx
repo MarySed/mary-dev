@@ -4,14 +4,16 @@ import { useFrame } from "react-three-fiber";
 import { a } from "react-spring/three";
 
 const Stars = ({ position }) => {
-  let group = useRef(null);
+  let group = useRef();
   let theta = 0;
 
   useFrame(() => {
     const r = 5 * Math.sin(THREE.Math.degToRad((theta += 0.01)));
     const s = Math.cos(THREE.Math.degToRad(theta * 2));
-    group.current.rotation.set(r, r, r);
-    group.current.scale.set(s, s, s);
+    if (group.current) {
+      group.current.rotation.set(r, r, r);
+      group.current.scale.set(s, s, s);
+    }
   });
 
   // TODO: Refactor this into React-Three-Fiber style code
