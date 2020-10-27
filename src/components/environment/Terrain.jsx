@@ -110,7 +110,9 @@ const Terrain = ({
 
       {/* TODO: Miiiiiight want to move this inside of terrain.... */}
 
-      <Enemies enemiesPos={enemiesPos} />
+      <Suspense fallback={null}>
+        <Enemies enemiesPos={enemiesPos} />
+      </Suspense>
 
       <End />
 

@@ -3,16 +3,12 @@ import React, { useState } from "react";
 import { useFrame } from "react-three-fiber";
 // Note: This file was able to be created thanks to Stephen Castle's R3F Game tutorial at: https://codeworkshop.dev/blog/2020-06-23-build-a-game-with-react-three-fiber-and-recoil/ . Thank you!
 
-// Calculate the distance between two points in 3d space.
-// Used to detect lasers intersecting with enemies.
 const distance = (laser, enemy) => {
-  const a = enemy.x / 10 - laser.x;
-  const b = enemy.y - laser.y;
-  const c = enemy.z - laser.z;
-
-  const result = Math.sqrt(a * a + b * b + c * c);
-
-  return result;
+  // Check if laser intersects with enemy
+  if (Math.round(laser.x) === enemy.x / 10 && Math.round(laser.y) === enemy.y) {
+    return true;
+  }
+  return false;
 };
 
 const Lasers = ({ lasers }) => {
@@ -78,8 +74,7 @@ const GameLogic = ({ userPosition, enemiesPos, setEnemiesPos, position }) => {
       ? enemiesPos.map((enemy) => {
           return (
             lasers.filter(
-              () =>
-                lasers.filter((laser) => distance(laser, enemy) < 3).length > 0
+              () => lasers.filter((laser) => distance(laser, enemy)).length > 0
             ).length > 0
           );
         })
