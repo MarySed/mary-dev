@@ -1,8 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useLoader, useFrame } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useRecoilState } from "recoil";
+import { userPositionState } from "components/recoil/state";
 
-const Character = ({ userPosition, setUserPosition }) => {
+const Character = () => {
+  const [userPosition, setUserPosition] = useRecoilState(userPositionState);
+
   // Place GLB models in public dir
   const { nodes } = useLoader(GLTFLoader, "/models/paper-plane.glb");
 

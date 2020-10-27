@@ -37,14 +37,14 @@ const Terrain = ({ terrainPos, setTerrainPos, isDay, enemiesPos }) => {
       if (canMoveRight && isBeforeEnd) {
         // Move to the right
         setTerrainPos({
-          position: { x: (terrainRef.current.position.x -= 1) },
+          position: { x: (terrainRef.current.position.x -= 0.5) },
         });
       }
 
       if (canMoveLeft && isAfterStart) {
         // Move to the left
         setTerrainPos({
-          position: { x: (terrainRef.current.position.x += 1) },
+          position: { x: (terrainRef.current.position.x += 0.5) },
         });
       }
     }

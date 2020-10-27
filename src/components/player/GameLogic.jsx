@@ -12,7 +12,7 @@ const distance = (laser, enemy) => {
   return false;
 };
 
-const GameLogic = ({ userPosition, enemiesPos, setEnemiesPos, position }) => {
+const GameLogic = ({ enemiesPos, setEnemiesPos }) => {
   const [lasers, setLasers] = useState([]);
 
   useFrame(() => {
@@ -53,13 +53,7 @@ const GameLogic = ({ userPosition, enemiesPos, setEnemiesPos, position }) => {
     );
   });
 
-  return (
-    <LaserController
-      lasers={lasers}
-      setLasers={setLasers}
-      userPosition={userPosition}
-    />
-  );
+  return <LaserController lasers={lasers} setLasers={setLasers} />;
 };
 
 export default GameLogic;

@@ -1,7 +1,10 @@
 import React from "react";
 import Lasers from "components/player/Lasers";
+import { useRecoilState } from "recoil";
+import { userPositionState } from "components/recoil/state";
 
-const LaserController = ({ lasers, setLasers, userPosition }) => {
+const LaserController = ({ lasers, setLasers }) => {
+  const [userPosition, setUserPosition] = useRecoilState(userPositionState);
   return (
     <>
       <mesh
@@ -22,7 +25,7 @@ const LaserController = ({ lasers, setLasers, userPosition }) => {
         <planeBufferGeometry attach="geometry" args={[100, 10]} />
         <meshBasicMaterial
           attach="material"
-          visible
+          visible={false}
           opacity={0.3}
           color="white"
           transparent

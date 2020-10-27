@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useLoader, useFrame } from "react-three-fiber";
+import { useLoader } from "react-three-fiber";
 
 const Enemies = ({ enemiesPos }) => {
   const { nodes } = useLoader(GLTFLoader, "/models/alien-1.glb");

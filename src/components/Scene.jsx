@@ -16,6 +16,7 @@ import Terrain from "components/environment/Terrain";
 import MoonIcon from "assets/icons/MoonIcon";
 import SunIcon from "assets/icons/SunIcon";
 import GameLogic from "components/player/GameLogic";
+import { RecoilRoot } from "recoil";
 import styles from "./Scene.module.scss";
 
 extend({ OrbitControls });
@@ -23,15 +24,12 @@ extend({ OrbitControls });
 const Scene = () => {
   const [isDay, setIsDay] = useState(isDaytime);
   const [terrainPos, setTerrainPos] = useState({ position: { x: 0 } });
-  const [userPosition, setUserPosition] = useState({
-    position: { x: 0, y: 0 },
-    rotation: { z: 0, x: 0, y: 0 },
-  });
+
   const [enemiesPos, setEnemiesPos] = useState([
     { id: Math.random(), x: 70, y: 2, z: 0 },
     { id: Math.random(), x: 70, y: -2, z: 0 },
     { id: Math.random(), x: 80, y: 0, z: 0 },
-    { id: Math.random(), x: 80, y: 1, z: 0 },
+    { id: Math.random(), x: 80, y: 1.5, z: 0 },
   ]);
 
   const fogColor = isDay ? "#b666d2" : "#85e21f";
@@ -46,37 +44,38 @@ const Scene = () => {
           })}
           shadowMap
         >
-          <CameraControls />
+          <RecoilRoot>
+            <CameraControls />
 
-          <directionalLight intensity={0.5} />
-          <ambientLight color="#d8d0d1" intensity={0.8} />
-          {/* TODO: Decide between the classic halloween colors of green (#85e21f) and orange (#cc7b32) */}
-          <fog attach="fog" args={[fogColor, 1, 20]} />
+            <directionalLight intensity={0.5} />
+            <ambientLight color="#d8d0d1" intensity={0.8} />
+            {/* TODO: Decide between the classic halloween colors of green (#85e21f) and orange (#cc7b32) */}
+            <fog attach="fog" args={[fogColor, 1, 20]} />
 
-          <Suspense fallback={<Loading />}>
-            <Character
-              userPosition={userPosition}
-              setUserPosition={setUserPosition}
-            />
-          </Suspense>
-
-          {-terrainPos.position.x > LEVEL_START &&
-            -terrainPos.position.x < LEVEL_END && (
-              <GameLogic
-                userPosition={userPosition}
-                enemiesPos={enemiesPos}
-                setEnemiesPos={setEnemiesPos}
+            <Suspense fallback={<Loading />}>
+              <Character
+              // userPosition={userPosition}
+              // setUserPosition={setUserPosition}
               />
-            )}
+            </Suspense>
 
-          <Terrain
-            terrainPos={terrainPos}
-            setTerrainPos={setTerrainPos}
-            isDay={isDay}
-            enemiesPos={enemiesPos}
-            setEnemiesPos={setEnemiesPos}
-            userPosition={userPosition}
-          />
+            {/* TODO: Deciding how/if I want to deal with shooting aliens */}
+            {/* {-terrainPos.position.x > LEVEL_START &&
+              -terrainPos.position.x < LEVEL_END && (
+                <GameLogic
+                  enemiesPos={enemiesPos}
+                  setEnemiesPos={setEnemiesPos}
+                />
+              )} */}
+
+            <Terrain
+              terrainPos={terrainPos}
+              setTerrainPos={setTerrainPos}
+              isDay={isDay}
+              enemiesPos={enemiesPos}
+              setEnemiesPos={setEnemiesPos}
+            />
+          </RecoilRoot>
         </Canvas>
       </Suspense>
 
