@@ -1,5 +1,7 @@
 ## Introduction
 
+Note from the future: I wonder if I should revamp this for halloween and create like a react-three-fiber halloween experience hahahaha
+
 A "weird west" inspired personal site running on React-Three-Fiber and React-Spring. Still a work in progress.
 
 Deployed at https://mary-dev.netlify.app/
